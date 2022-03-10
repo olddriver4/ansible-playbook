@@ -1,0 +1,6 @@
+- name: directly copy redis binary
+  #unarchive:
+  copy:
+      src: files/redis-{{ rev }}.tar.gz
+      dest: "{{ work_dir }}"
+

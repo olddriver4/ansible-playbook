@@ -1,0 +1,10 @@
+- include: add_group.yml
+- include: add_user.yml 
+- include: check.yml 
+- include: download_mysql_binary.yml
+- include: link.yml
+- include: create_datadir.yml
+- include: copy_config_file.yml
+- include: init.yml
+- include: install.yml
+- include: start.yml

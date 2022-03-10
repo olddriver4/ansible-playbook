@@ -1,0 +1,2 @@
+- name: add profile openresty
+  shell: "if [ -z $(grep -w 'Openresty_PATH={{ nginx_dir }}' /etc/profile) ];then echo 'Openresty_PATH={{ nginx_dir }}\nPATH=$Openresty_PATH/sbin:$PATH' >>/etc/profile; else echo 'openresty profile existed .'; fi"

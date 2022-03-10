@@ -1,0 +1,2 @@
+- name: init mysql
+  shell: /usr/local/mysql/bin/mysqld --initialize --user=mysql

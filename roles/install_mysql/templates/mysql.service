@@ -1,0 +1,14 @@
+[Unit]
+Description=mysql service
+
+[Service]
+Type=forking
+
+ExecStart=/etc/init.d/mysql start
+ExecReload=/etc/init.d/mysql restart
+ExecStop=/etc/init.d/mysql stop
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+Alias=mysql.service

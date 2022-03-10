@@ -1,0 +1,13 @@
+- name: download mysql binary from mysql.com
+  get_url:
+    url: https://downloads.mysql.com/archives/get/p/23/file/mysql-{{rev}}-linux-glibc2.12-x86_64.tar.gz
+    #url: https://cdn.mysql.com/archives/mysql-5.7/mysql-{{rev}}-linux-glibc2.12-x86_64.tar.gz
+    dest: "/usr/local/src/"
+    force: true
+
+- name: decompress downloaded binary
+  unarchive:
+      src: /usr/local/src/mysql-{{rev}}-linux-glibc2.12-x86_64.tar.gz
+      dest: "{{work_dir}}"
+      remote_src: true
+

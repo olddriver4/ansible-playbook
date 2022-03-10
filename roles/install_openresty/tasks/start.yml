@@ -1,0 +1,8 @@
+- name: load module
+  shell: "if [ -z $(grep -w '/usr/local/lib' /etc/ld.so.conf) ];then echo '/usr/local/lib' >>/etc/ld.so.conf; ldconfig; else echo 'lib ldconfig existed .'; fi"
+
+- name: check openresty
+  shell: "{{ nginx_dir }}/sbin/nginx -t"
+
+- name: start openresty
+  shell: "systemctl daemon-reload && systemctl start openresty && systemctl enable openresty"

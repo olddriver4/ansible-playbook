@@ -1,0 +1,2 @@
+- name: start mysql
+  shell: "systemctl daemon-reload && systemctl start mysql && systemctl enable mysql"

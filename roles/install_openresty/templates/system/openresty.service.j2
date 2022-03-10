@@ -1,0 +1,15 @@
+[Unit]
+Description=A dynamic web platform based on Nginx and LuaJIT.
+After=network.target
+
+[Service]
+Type=forking
+PIDFile={{ nginx_dir }}/logs/nginx.pid
+ExecStartPre={{ nginx_dir }}/sbin/nginx -t -c {{ nginx_dir }}/conf/nginx.conf
+ExecStart={{ nginx_dir }}/sbin/nginx
+ExecReload={{ nginx_dir }}/sbin/nginx -s reload
+ExecStop={{ nginx_dir }}/sbin/nginx -s quit
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

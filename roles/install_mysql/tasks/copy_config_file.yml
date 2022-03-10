@@ -1,0 +1,6 @@
+- name: copy config file to remote server
+  template: src={{ item.src }} dest={{ item.dest }} owner=root group=root
+  with_items:
+    - { src: mysql, dest: "/etc/init.d/mysql" }
+    - { src: mysql.service, dest: "/etc/systemd/system/mysql.service" }
+    - { src: my.cnf.j2, dest: "/etc/mysql/my.cnf" }

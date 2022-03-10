@@ -1,0 +1,77 @@
+#install before
+- name: install dependency
+  tags: install_dependency
+  apt:
+    name: libaio1
+    update_cache: yes
+
+#install mysql
+- name: initialize mysql
+  tags: init_mysql
+  command: /usr/local/mysql/bin/mysqld --initialize --user=mysql
+
+- name: start mysql
+  tags: start_mysql
+  shell: "/usr/local/mysql/bin/mysqld_safe --user=mysql &"
+
+- name: add env
+  tags: add_env
+  shell: echo 'MYSQL_PATH=/usr/local/mysql' >> /etc/profile && echo 'PATH=$MYSQL_PATH/bin:$PATH' >> /etc/profile
+
+- name: get root tmp password
+  tags: get_root_tmp_passwd
+  shell: "grep 'password' {{log_dir}}/error.log|awk '{print $(NF)}'"
+  register: root_tmp_password
+
+- debug:
+    msg:
+      tmp pass is {{root_tmp_password.stdout}}
+  tags: show_tmp_pass
+
+- name: set mysql root password
+  tags: change_root_pass
+  command: /usr/local/mysql/bin/mysql --user root --password={{ root_tmp_password.stdout }} --connect-expired-password --execute="ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql_root_password }}';"
+
+- name: install python-pip
+  tags: install_pip
+  apt:
+    name: python-pip
+    state: present
+    update_cache: true
+
+- name: install pymysql
+  tags: install_pymysql
+  pip:
+    name: pymysql
+    state: present
+    version: 0.10.1
+
+#install after
+- name: create database
+  tags: create_db
+  mysql_db:
+    login_user: "root"
+    login_host: "localhost"
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: "/tmp/mysql.sock"
+    name: "{{ item.name }}"
+    state: present
+  with_items:
+    - "{{ mysql.dbs }}"
+
+- name: create mysql db user
+  tags: create_mysql_user
+  mysql_user:
+    login_user: "root"
+    login_host: "localhost"
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: "/tmp/mysql.sock"
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    priv: '{{ mysql.dbs.name }}.*:select,insert,update,delete,alter'
+    #priv: 'conflux_scan.*:select,insert,update,delete,alter'
+    host: '%'
+    state: present
+  #no_log: true
+  with_items:
+    - "{{ mysql.users }}"

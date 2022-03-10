@@ -1,0 +1,17 @@
+rev: 5.7.31
+work_dir: /usr/local/
+server_id: 200
+datadir: /data/mysql/mydata
+log_dir: /data/mysql/log
+binary_log_dir: /data/mysql/binlog
+bp_size: 4G
+mysql_root_password: "dasnadDsa123"
+
+mysql:
+  users:
+    name: alert
+    password: "idsNisddzo4"
+    priv: "osmonitor.*:select,create,update,delete,alter"
+
+  dbs:
+    name: osmonitor

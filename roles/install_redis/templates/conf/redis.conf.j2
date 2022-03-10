@@ -1,0 +1,28 @@
+bind 0.0.0.0
+protected-mode yes
+port {{ port }}
+timeout 100
+tcp-keepalive 300
+daemonize yes
+supervised no
+save 900 1
+save 300 10
+save 60 10000
+dbfilename dump.rdb
+dir {{ redis_datadir }}
+logfile "{{ redis_logdir }}/redis.log"
+slave-serve-stale-data yes
+slave-read-only yes
+appendonly {{ aofstatus }}
+appendfilename "appendonly.aof"
+appendfsync everysec
+aof-load-truncated yes
+maxmemory {{ maxmemory }}
+maxmemory-policy {{ maxmemory_policy }}
+slowlog-log-slower-than 1000
+slowlog-max-len 1000
+io-threads-do-reads yes
+io-threads 4
+activedefrag yes
+rdbcompression yes
+requirepass "{{ password }}"

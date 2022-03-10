@@ -1,0 +1,4 @@
+- name: check if mysqld has been installed
+  tags: check_if_mysql_exists
+  stat: path=/usr/local/mysql-{{ rev }}-linux-glibc2.12-x86_64
+  register: mysql_result

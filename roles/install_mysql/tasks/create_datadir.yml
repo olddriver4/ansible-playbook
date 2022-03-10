@@ -1,0 +1,14 @@
+- name: create data dir
+  tags: create_data_dirs
+  file:
+    path: "{{ item }}"
+    owner: mysql
+    group: mysql
+    mode: 0750
+    state: directory
+  with_items:
+    - "{{ datadir }}"
+    - "{{ log_dir }}"
+    - "{{ binary_log_dir }}"
+    - "/etc/mysql"
+    - "/usr/local/mysql/mysql-files"

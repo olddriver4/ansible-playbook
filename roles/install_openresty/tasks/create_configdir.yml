@@ -1,0 +1,8 @@
+- name: create config dir
+  file: path={{ item }} state=directory owner=root group=root
+  with_items:
+    - "{{ nginx_dir }}/upstream"
+    - "{{ nginx_dir }}/vhosts"
+    - "{{ nginx_dir }}/conf.secure"
+    - "{{ nginx_logdir }}"
+    - "{{ geoip_dir }}"

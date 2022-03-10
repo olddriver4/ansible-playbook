@@ -1,0 +1,15 @@
+#version
+rev: 6.0.6
+
+#conf
+port: 6379
+redis_datadir: /data/redis/data
+redis_logdir: /data/redis/logs
+maxmemory: 3gb
+maxmemory_policy: allkeys-lru 
+aofstatus: 'no'
+password: dsanisa123
+
+#info
+work_dir: /usr/local
+redis_dir: /data/redis

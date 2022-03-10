@@ -1,0 +1,14 @@
+[Unit]
+Description=redis-server
+After=network.target
+
+[Service]
+Type=forking
+ExecStart={{ work_dir }}/redis-{{ rev }}/src/redis-server   {{ work_dir }}/redis-{{ rev }}/redis.conf
+ExecStop={{ redis_dir }}/tool/redis-shutdown.sh
+PrivateTmp=true
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

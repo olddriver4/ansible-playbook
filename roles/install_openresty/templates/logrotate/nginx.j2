@@ -1,0 +1,19 @@
+{{ nginx_logdir }}/*.log {
+
+su root root
+create 644 root root
+daily
+dateext
+dateformat.%Y-%m-%d
+rotate 1
+minsize 500M
+nocopytruncate
+nocompress
+missingok
+notifempty
+olddir {{ nginx_logdir }}/oldlog
+postrotate
+        [ -f {{ nginx_dir }}/logs/nginx.pid ] && /usr/bin/openresty -s reload
+endscript
+
+}

@@ -1,0 +1,11 @@
+- name: download openresty binary from openresty.com
+  get_url:
+    url: https://openresty.org/download/openresty-{{ rev }}.tar.gz
+    dest: "{{ download_dir }}"
+    force: true
+
+- name: decompress downloaded binary
+  unarchive:
+      src: /usr/local/src/openresty-{{ rev }}.tar.gz
+      dest: "{{ download_dir }}"
+      remote_src: true

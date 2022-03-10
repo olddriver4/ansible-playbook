@@ -1,0 +1,7 @@
+- name: create user
+  user: 
+    name: "{{ nginx_user }}"
+    group: "{{ nginx_group }}"
+    shell: /bin/false
+    system: yes
+    createhome: no

@@ -1,0 +1,5 @@
+- include: download_binary.yml 
+- include: install.yml 
+- include: create_configdir.yml
+- include: copy_config_file.yml 
+- include: start.yml

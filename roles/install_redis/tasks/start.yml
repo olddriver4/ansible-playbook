@@ -1,0 +1,2 @@
+- name: start redis
+  shell: "systemctl daemon-reload && systemctl start redis && systemctl enable redis"

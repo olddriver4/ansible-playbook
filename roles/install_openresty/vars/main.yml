@@ -1,0 +1,12 @@
+#version
+rev: 1.19.3.1
+
+#info
+nginx_user: www-data
+nginx_group: www-data
+work_dir: /usr/local
+download_dir: "{{ work_dir }}/src"
+prefix_dir: "{{ work_dir }}/openresty"
+nginx_dir: "{{ prefix_dir }}/nginx"
+modules_dir: "{{ nginx_dir }}/modules"
+nginx_logdir: /var/log/nginx

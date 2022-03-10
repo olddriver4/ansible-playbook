@@ -1,0 +1,12 @@
+- name: download redis binary from redis.com
+  get_url:
+    url: https://download.redis.io/releases/redis-{{ rev }}.tar.gz
+    dest: "/usr/local/src/"
+    force: true
+
+- name: decompress downloaded binary
+  unarchive:
+      src: /usr/local/src/redis-{{ rev }}.tar.gz
+      dest: "{{ work_dir }}"
+      remote_src: true
+

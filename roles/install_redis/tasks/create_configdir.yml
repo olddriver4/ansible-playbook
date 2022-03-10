@@ -1,0 +1,7 @@
+- name: create config dir
+  file: path={{ item }} state=directory owner=root group=root
+  with_items:
+    - "{{ redis_dir }}"
+    - "{{ redis_dir }}/tool"
+    - "{{ redis_datadir }}"
+    - "{{ redis_logdir }}"

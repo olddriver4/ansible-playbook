@@ -1,0 +1,6 @@
+- name: copy config file to remote server
+  template: src={{ item.src }} dest={{ item.dest }} owner=root group=root
+  with_items:
+    - { src: tool/redis.service.j2, dest: "/etc/systemd/system/redis.service" }
+    - { src: tool/redis-shutdown.sh, dest: "{{ redis_dir }}/tool/redis-shutdown.sh" }
+    - { src: conf/redis.conf.j2, dest: "{{ work_dir }}/redis-{{ rev }}/redis.conf" }

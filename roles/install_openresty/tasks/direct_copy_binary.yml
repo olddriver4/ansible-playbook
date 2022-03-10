@@ -1,0 +1,6 @@
+- name: directly copy openresty binary
+  #unarchive:
+  copy:
+      src: files/openresty-{{ rev }}.tar.gz
+      dest: "{{ download_dir }}"
+

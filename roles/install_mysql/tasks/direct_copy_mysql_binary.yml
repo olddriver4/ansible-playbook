@@ -1,0 +1,6 @@
+- name: directly copy mysql binary
+  #unarchive:
+  copy:
+      src: files/mysql-{{rev}}-linux-glibc2.12-x86_64.tar.gz
+      dest: "{{working_dir}}"
+

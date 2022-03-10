@@ -1,0 +1,13 @@
+- hosts: global
+  gather_facts: no
+  tasks:
+      - name: download binary from s3
+        tags: update_binary
+        import_tasks: tasks/download_binary.yml
+
+- hosts: china
+  gather_facts: no
+  tasks:
+      - name: copy binary from local
+        tags: update_binary
+        import_tasks: tasks/direct_copy_binary.yml

@@ -1,0 +1,6 @@
+- name: create user
+  user: 
+    name: mysql 
+    group: mysql 
+    shell: /bin/false
+    system: yes

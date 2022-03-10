@@ -1,0 +1,9 @@
+- hosts: all
+  #gather_facts: no #不能关闭，需要获取facts信息，判断apt还是yum
+  become: yes
+  become_method: sudo
+
+  roles:
+    - { role: install_mysql, tags: ["mysql","db"] }
+    - { role: install_openresty, tags: ["nginx","web"] }
+    - { role: install_redis, tags: ["redis","cache"] }
